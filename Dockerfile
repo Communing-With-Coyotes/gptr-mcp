@@ -11,6 +11,10 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy local gpt-researcher source (with our edits) — replaces PyPI install
+COPY gpt-researcher /app/gpt-researcher
+RUN pip install --no-cache-dir -e /app/gpt-researcher
+
 # Copy application code
 COPY . .
 
