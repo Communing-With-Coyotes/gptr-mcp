@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements first for better Docker layer caching
-COPY requirements.txt .
+COPY gptr-mcp/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy local gpt-researcher source (with our edits) — replaces PyPI install
@@ -16,7 +16,7 @@ COPY gpt-researcher /app/gpt-researcher
 RUN pip install --no-cache-dir -e /app/gpt-researcher
 
 # Copy application code
-COPY . .
+COPY gptr-mcp/ .
 
 # Set environment variables for Docker
 ENV MCP_TRANSPORT=sse
@@ -31,4 +31,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=7s --retries=3 \
     CMD curl -f http://localhost:8000/health || exit 1
 
 # Run the server
-CMD ["python", "server.py"] 
+CMD ["python", "server.py"]

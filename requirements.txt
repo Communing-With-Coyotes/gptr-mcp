@@ -1,5 +1,4 @@
-# GPT Researcher dependencies
-gpt-researcher>=0.14.0
+# GPT Researcher dependencies (installed via editable local source instead)
 python-dotenv
 
 # MCP dependencies
